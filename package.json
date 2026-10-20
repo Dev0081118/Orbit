@@ -1,0 +1,6 @@
+{
+  "name": "orbit", "version": "3.0.0", "private": true, "type": "module",
+  "description": "Mac project agent with reviewed Gemini Free handoff, safe local execution, and offline Qwen chat",
+  "engines": {"node": ">=24.0.0"},
+  "scripts": {"start": "node scripts/start.mjs", "server": "node server.mjs", "test": "node --test --test-concurrency=1 test/*.test.mjs", "benchmark": "node scripts/benchmark.mjs"}
+}

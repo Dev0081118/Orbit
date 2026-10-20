@@ -1,0 +1,6 @@
+data/
+node_modules/
+.DS_Store
+Orbit.app/
+*.log
+docs/orbit-preview.png

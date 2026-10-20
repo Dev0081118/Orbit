@@ -1,0 +1,217 @@
+{
+  "date": "2026-10-19T21:06:22.550Z",
+  "hardware": {
+    "arch": "arm64",
+    "memoryGB": 16
+  },
+  "ollama": "0.12.3",
+  "settings": {
+    "model": "qwen3:4b",
+    "context": 4096,
+    "maxTokens": 1024,
+    "temperature": 0.6,
+    "thinking": false,
+    "theme": "dark"
+  },
+  "model": {
+    "name": "qwen3:4b",
+    "model": "qwen3:4b",
+    "modified_at": "2026-10-20T02:33:02.59990659+05:30",
+    "size": 2497293931,
+    "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "4.0B",
+      "quantization_level": "Q4_K_M"
+    }
+  },
+  "cases": [
+    {
+      "name": "cold-model",
+      "passed": true,
+      "prompt": "In about 80 words, explain what quantization does to a local language model.",
+      "answer": "Okay, the user wants me to explain what quantization does to a local language model in about 80 words. Let me recall what I know about this topic. \n\nQuantization is a technique used to reduce the size and computational requirements of machine learning models. For local language models running on a Mac, it's particularly important because it helps with memory usage and speed. \n\nI should focus on the key points: how quantization reduces precision from floating point to integers (like 8-bit), the resulting smaller model size, faster inference, and lower memory usage. I need to keep it under 80 words while being accurate. \n\nThe user specified \"local language model\" so I'll emphasize the practical benefits for running models on personal devices. I must avoid mentioning anything about web access or code execution since I can't do that. \n\nI'll structure it as: 1) What quantization does 2) Why it matters for local models 3) Key benefits. Need to be precise with the word count. \n\nHmm... I should check if I'm using correct terminology - yes, 4-bit/8-bit quantization is standard. Important to clarify it doesn't reduce model accuracy too much. \n\nLet me count words as I draft: \"Quantization reduces a language model's precision from 32-bit floating point to lower integer values (e.g., 4-bit or 8-bit). This significantly shrinks model size (often 4x smaller) and speeds up inference on local hardware like Macs by decreasing memory usage and computation intensity. While slightly reducing accuracy, modern quantized models maintain usable performance for tasks like text generation on personal devices.\"\n\nThat's 65 words - perfect. I'll make sure to mention it's for local execution since that's what the user asked about. No need to compare with other techniques unless relevant. \n\nDouble-checking: no live web access claims, no code execution mentions, stays practical. Good to go.\n</think>\n\nQuantization reduces a language model's precision from 32-bit floating point to lower integer values (e.g., 4-bit or 8-bit). This significantly shrinks model size (often 4x smaller) and speeds up inference on local hardware like Macs by decreasing memory usage and computation intensity. While slightly reducing accuracy, modern quantized models maintain usable performance for tasks like text generation on personal devices without requiring cloud resources. (78 words)",
+      "firstEventMs": 2068,
+      "wallMs": 19082,
+      "model": "qwen3:4b",
+      "sources": [],
+      "omitted": 0,
+      "status": "complete",
+      "tokens": 495,
+      "tokensPerSecond": 29.1,
+      "firstTokenMs": 2064,
+      "elapsedMs": 19077,
+      "promptTokens": 108,
+      "reason": "stop"
+    },
+    {
+      "name": "warm-code",
+      "passed": true,
+      "prompt": "Write a short Python function is_prime(n), handling numbers below 2. Include code only.",
+      "answer": "Okay, the user wants a short Python function called is_prime(n) that handles numbers below 2. They specified to include code only. Let me think.\n\nFirst, primes are numbers greater than 1. So for n < 2, the function should return False. That's straightforward.\n\nThe function needs to check if n is 2 or greater. If n is less than 2, return False. Then check divisibility from 2 up to the square root of n. If any divisor is found, return False. Otherwise, return True.\n\nWait, but the user said \"handling numbers below 2\". So numbers below 2 are 0 and 1. Both are not primes. So for n < 2, return False.\n\nLet me draft the code.\n\ndef is_prime(n):\n    if n < 2:\n        return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n\nWait, but does this handle n=2 correctly? For n=2, the loop runs from 2 to int(2**0.5) which is 1. So range(2, 2) is empty. So returns True. Correct.\n\nWait, the user wants it short. Maybe the code is okay. Let me check the word count. The user said \"short\", so this should be fine.\n\nWait, the problem says \"handling numbers below 2\". So the function returns False for n < 2. The code above does that.\n\nYes, this should work. Let me test with some examples.\n\nn=0: returns False (correct)\nn=1: returns False (correct)\nn=2: returns True (correct)\nn=3: returns True (correct)\nn=4: returns False (correct)\n\nLooks good. The user wants code only, so no explanations. Just the function.\n\nWait, the user said \"Write a short Python function is_prime(n), handling numbers below 2. Include code only.\"\n\nSo the code is:\n\ndef is_prime(n):\n    if n < 2:\n        return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n\nBut maybe the user wants it even shorter? Let's see. For example, using a one-liner, but the problem says \"short function\", so the above is standard.\n\nAlternatively, could use a while loop, but range is fine.\n\nYes, this should be the answer.\n</think>\n\ndef is_prime(n):\n    if n < 2:\n        return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True",
+      "firstEventMs": 2179,
+      "wallMs": 24015,
+      "model": "qwen3:4b",
+      "sources": [],
+      "omitted": 0,
+      "status": "complete",
+      "tokens": 593,
+      "tokensPerSecond": 27.2,
+      "firstTokenMs": 2175,
+      "elapsedMs": 24010,
+      "promptTokens": 631,
+      "reason": "stop"
+    },
+    {
+      "name": "arithmetic",
+      "passed": true,
+      "prompt": "What is 17 multiplied by 23? Reply with the number only.",
+      "answer": "Okay, the user is asking for the product of 17 and 23, and wants just the number. Let me calculate that.\n\nFirst, 17 times 20 is 340, and 17 times 3 is 51. Adding those together: 340 + 51 = 391. So 17 * 23 = 391.\n\nWait, let me double-check to be sure. 23 times 17: 20*17=340, 3*17=51, 340+51=391. Yep, that's right.\n\nThe user said to reply with the number only, so no extra text. Just 391.\n</think>\n\n391",
+      "firstEventMs": 2942,
+      "wallMs": 9281,
+      "model": "qwen3:4b",
+      "sources": [],
+      "omitted": 0,
+      "status": "complete",
+      "tokens": 171,
+      "tokensPerSecond": 27,
+      "firstTokenMs": 2938,
+      "elapsedMs": 9276,
+      "promptTokens": 1250,
+      "reason": "stop"
+    },
+    {
+      "name": "conversation-memory-set",
+      "passed": true,
+      "prompt": "For this test conversation only, remember that my project codename is Lantern47. Confirm briefly.",
+      "answer": "Okay, the user wants me to confirm that their project codename is Lantern47 for this test conversation only. They specified \"confirm briefly\".\n\nI need to be precise here. The instruction says \"for this test conversation only\", so I shouldn't make it permanent or imply it's part of my usual knowledge. \n\nThe user is testing if I can follow specific instructions about their project codename. They want a brief confirmation without extra fluff.\n\nI'll respond with just \"Lantern47 confirmed\" to be brief and directly address their request. No need for additional context since they said \"confirm briefly\".\n\nImportant: Must not add anything else like explanations or other details. Strictly follow their instruction to confirm the codename for this test conversation only.\n\nAlso, the user mentioned \"my project codename is Lantern47\" - so I should use their exact phrasing in the confirmation. The response should be minimal as requested.\n</think>\n\nLantern47 confirmed",
+      "firstEventMs": 1145,
+      "wallMs": 8396,
+      "model": "qwen3:4b",
+      "sources": [],
+      "omitted": 0,
+      "status": "complete",
+      "tokens": 198,
+      "tokensPerSecond": 27.3,
+      "firstTokenMs": 1142,
+      "elapsedMs": 8392,
+      "promptTokens": 1450,
+      "reason": "stop"
+    },
+    {
+      "name": "conversation-memory-recall",
+      "passed": true,
+      "prompt": "What is the project codename I just gave you? Reply with the codename only.",
+      "answer": "Okay, the user is asking for the project codename they just gave me. Let me check the conversation history.\n\nIn the previous message, they said: \"For this test conversation only, remember that my project codename is Lantern47. Confirm briefly.\"\n\nThen they asked: \"What is the project codename I just gave you? Reply with the codename only.\"\n\nSo the codename they provided was Lantern47. They want me to reply with just that codename.\n\nI need to make sure I don't add anything else. The user said \"reply with the codename only\", so I should output \"Lantern47\" without any extra text.\n\nWait, but in the last response, I confirmed \"Lantern47 confirmed\". Now they're asking what the codename is. So the answer is Lantern47.\n\nYes, just the codename. No explanations, no extra words. Strictly \"Lantern47\".\n</think>\n\nLantern47",
+      "firstEventMs": 1282,
+      "wallMs": 8831,
+      "model": "qwen3:4b",
+      "sources": [],
+      "omitted": 0,
+      "status": "complete",
+      "tokens": 203,
+      "tokensPerSecond": 26.9,
+      "firstTokenMs": 1279,
+      "elapsedMs": 8828,
+      "promptTokens": 1675,
+      "reason": "stop"
+    },
+    {
+      "name": "document-retrieval",
+      "passed": true,
+      "prompt": "According to synthetic-project-notes.txt, what is the launch key for Project Finch? Cite the source.",
+      "answer": "Okay, the user is asking about the launch key for Project Finch based on synthetic-project-notes.txt. Let me check the provided sources.\n\nFrom the initial user-provided preferences section: [Source 1: synthetic-project-notes.txt, excerpt 1] says \"Project Finch uses the launch key Copper Finch. Its demonstration date is November 23.\"\n\nThe user wants me to cite the source when using it. The instruction says to cite [Source N] when using them. So I should reference [Source 1].\n\nThe question asks specifically for the launch key. The excerpt states \"Copper Finch\" as the launch key.\n\nI need to make sure I don't add any extra information. Just the launch key and the source citation.\n\nThe answer should be: Copper Finch [Source 1]\n\nWait, the user says \"According to synthetic-project-notes.txt, what is the launch key for Project Finch? Cite the source.\"\n\nSo the answer is Copper Finch from Source 1.\n\nLet me check the word count. The user didn't specify a word count here, but the previous answers were concise.\n\nYes, the response should be: Copper Finch [Source 1]\n\nI need to be accurate and follow the instructions. The source is synthetic-project-notes.txt, excerpt 1, so [Source 1] is correct.\n\nNo other sources are mentioned in the user's provided data. The user says \"synthetic-project-notes.txt\" is the source, so [Source 1] is the citation.\n\nDouble-checking: The user says \"Cite the source\" so I should include [Source 1] after the answer.\n\nYes, this is correct.\n</think>\n\nCopper Finch [Source 1]",
+      "firstEventMs": 8639,
+      "wallMs": 20970,
+      "model": "qwen3:4b",
+      "sources": [
+        {
+          "name": "synthetic-project-notes.txt",
+          "id": "9242c4d5-e1cd-4efc-bab5-201dc19e9ba4",
+          "chunk": 1,
+          "text": "Project Finch uses the launch key Copper Finch. Its demonstration date is November 23. These are synthetic testing facts."
+        }
+      ],
+      "omitted": 0,
+      "status": "complete",
+      "tokens": 346,
+      "tokensPerSecond": 28.1,
+      "firstTokenMs": 8636,
+      "elapsedMs": 20966,
+      "promptTokens": 1983,
+      "reason": "stop"
+    }
+  ],
+  "after": {
+    "app": "orbit-local",
+    "available": true,
+    "error": null,
+    "models": [
+      {
+        "name": "qwen3:4b",
+        "model": "qwen3:4b",
+        "modified_at": "2026-10-20T02:33:02.59990659+05:30",
+        "size": 2497293931,
+        "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M"
+        }
+      }
+    ],
+    "loaded": [
+      {
+        "name": "qwen3:4b",
+        "model": "qwen3:4b",
+        "size": 3153274400,
+        "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-10-20T02:40:53.138473+05:30",
+        "size_vram": 3153274400,
+        "context_length": 4096
+      }
+    ],
+    "version": "0.12.3",
+    "busy": null,
+    "pulling": false,
+    "hardware": {
+      "arch": "arm64",
+      "memoryGB": 16
+    },
+    "catalog": {
+      "qwen3:4b": {
+        "name": "Qwen 3 \u00b7 4B",
+        "size": "2.5 GB",
+        "description": "Fast \u00b7 recommended for 16 GB"
+      },
+      "qwen3:8b": {
+        "name": "Qwen 3 \u00b7 8B",
+        "size": "5.2 GB",
+        "description": "More capable \u00b7 uses more memory"
+      }
+    }
+  },
+  "memoryPressure": "The system has 17179869184 (1048576 pages with a page size of 16384).\nSystem-wide memory free percentage: 33%",
+  "passed": false,
+  "validationNote": "Initial diagnostic run before model-tag fix. Arithmetic/content keywords passed weak smoke checks, but outputs failed requested concise formatting because generic qwen3:4b resolved to thinking-only weights. Not the shipped default. Superseded by BENCHMARK.json after remediation."
+}

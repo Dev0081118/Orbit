@@ -1,0 +1,233 @@
+{
+  "date": "2026-10-19T21:23:32.398Z",
+  "hardware": {
+    "arch": "arm64",
+    "memoryGB": 16
+  },
+  "ollama": "0.12.3",
+  "settings": {
+    "model": "qwen3:4b-q4_K_M",
+    "context": 4096,
+    "maxTokens": 1024,
+    "temperature": 0.6,
+    "thinking": false,
+    "theme": "dark"
+  },
+  "model": {
+    "name": "qwen3:4b-q4_K_M",
+    "model": "qwen3:4b-q4_K_M",
+    "modified_at": "2026-10-20T02:50:59.64895244+05:30",
+    "size": 2620788260,
+    "digest": "2bfd38a7daaf4b1037efe517ccb73d1a3bbd4822cf89f1a82be1569050a114e0",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "4.0B",
+      "quantization_level": "Q4_K_M"
+    }
+  },
+  "cases": [
+    {
+      "name": "cold-model",
+      "passed": true,
+      "prompt": "In about 80 words, explain what quantization does to a local language model.",
+      "answer": "Quantization reduces the precision of a model's weights, converting them from 32-bit floating points to lower-bit representations (e.g., 4-bit or 8-bit). This process decreases the model's memory usage and computational requirements, making it more efficient for deployment on devices with limited resources. It allows larger models to run faster and with less power, but may slightly reduce model accuracy.",
+      "firstEventMs": 2744,
+      "wallMs": 5424,
+      "model": "qwen3:4b-q4_K_M",
+      "sources": [],
+      "omitted": 0,
+      "status": "complete",
+      "tokens": 80,
+      "tokensPerSecond": 29.8,
+      "firstTokenMs": 2721,
+      "elapsedMs": 5402,
+      "promptTokens": 113,
+      "reason": "stop"
+    },
+    {
+      "name": "warm-code",
+      "passed": true,
+      "prompt": "Write a short Python function is_prime(n), handling numbers below 2. Include code only.",
+      "answer": "def is_prime(n):\n    if n < 2:\n        return False\n    if n == 2:\n        return True\n    if n % 2 == 0:\n        return False\n    for i in range(3, int(n**0.5) + 1, 2):\n        if n % i == 0:\n            return False\n    return True",
+      "firstEventMs": 519,
+      "wallMs": 3210,
+      "model": "qwen3:4b-q4_K_M",
+      "sources": [],
+      "omitted": 0,
+      "status": "complete",
+      "tokens": 80,
+      "tokensPerSecond": 29.7,
+      "firstTokenMs": 515,
+      "elapsedMs": 3205,
+      "promptTokens": 221,
+      "reason": "stop"
+    },
+    {
+      "name": "arithmetic",
+      "passed": false,
+      "prompt": "What is 17 multiplied by 23? Reply with the number only.",
+      "answer": "401",
+      "firstEventMs": 514,
+      "wallMs": 619,
+      "model": "qwen3:4b-q4_K_M",
+      "sources": [],
+      "omitted": 0,
+      "status": "complete",
+      "tokens": 4,
+      "tokensPerSecond": 38.3,
+      "firstTokenMs": 510,
+      "elapsedMs": 614,
+      "promptTokens": 327,
+      "reason": "stop"
+    },
+    {
+      "name": "conversation-memory-set",
+      "passed": true,
+      "prompt": "For this test conversation only, remember that my project codename is Lantern47. Confirm briefly.",
+      "answer": "I remember that your project codename is Lantern47.",
+      "firstEventMs": 278,
+      "wallMs": 705,
+      "model": "qwen3:4b-q4_K_M",
+      "sources": [],
+      "omitted": 0,
+      "status": "complete",
+      "tokens": 13,
+      "tokensPerSecond": 30.5,
+      "firstTokenMs": 276,
+      "elapsedMs": 702,
+      "promptTokens": 360,
+      "reason": "stop"
+    },
+    {
+      "name": "conversation-memory-recall",
+      "passed": true,
+      "prompt": "What is the project codename I just gave you? Reply with the codename only.",
+      "answer": "Lantern47",
+      "firstEventMs": 281,
+      "wallMs": 460,
+      "model": "qwen3:4b-q4_K_M",
+      "sources": [],
+      "omitted": 0,
+      "status": "complete",
+      "tokens": 6,
+      "tokensPerSecond": 33.5,
+      "firstTokenMs": 278,
+      "elapsedMs": 457,
+      "promptTokens": 400,
+      "reason": "stop"
+    },
+    {
+      "name": "document-retrieval",
+      "passed": true,
+      "prompt": "According to synthetic-project-notes.txt, what is the launch key for Project Finch? Cite the source.",
+      "answer": "The launch key for Project Finch is \"Copper Finch\" [Source 1].",
+      "firstEventMs": 1676,
+      "wallMs": 2269,
+      "model": "qwen3:4b-q4_K_M",
+      "sources": [
+        {
+          "name": "synthetic-project-notes.txt",
+          "id": "fe1934de-a36b-4f38-8a0c-70a78c3b76c6",
+          "chunk": 1,
+          "text": "Project Finch uses the launch key Copper Finch. Its demonstration date is November 23. These are synthetic testing facts."
+        }
+      ],
+      "omitted": 0,
+      "status": "complete",
+      "tokens": 18,
+      "tokensPerSecond": 30.4,
+      "firstTokenMs": 1674,
+      "elapsedMs": 2266,
+      "promptTokens": 512,
+      "reason": "stop"
+    }
+  ],
+  "after": {
+    "app": "orbit-local",
+    "available": true,
+    "error": null,
+    "models": [
+      {
+        "name": "qwen3:4b-q4_K_M",
+        "model": "qwen3:4b-q4_K_M",
+        "modified_at": "2026-10-20T02:50:59.64895244+05:30",
+        "size": 2620788260,
+        "digest": "2bfd38a7daaf4b1037efe517ccb73d1a3bbd4822cf89f1a82be1569050a114e0",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M"
+        }
+      },
+      {
+        "name": "qwen3:4b",
+        "model": "qwen3:4b",
+        "modified_at": "2026-10-20T02:33:02.59990659+05:30",
+        "size": 2497293931,
+        "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M"
+        }
+      }
+    ],
+    "loaded": [
+      {
+        "name": "qwen3:4b-q4_K_M",
+        "model": "qwen3:4b-q4_K_M",
+        "size": 3276768800,
+        "digest": "2bfd38a7daaf4b1037efe517ccb73d1a3bbd4822cf89f1a82be1569050a114e0",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M"
+        },
+        "expires_at": "2026-10-20T02:56:45.092327+05:30",
+        "size_vram": 3276768800,
+        "context_length": 4096
+      }
+    ],
+    "version": "0.12.3",
+    "busy": null,
+    "pulling": false,
+    "hardware": {
+      "arch": "arm64",
+      "memoryGB": 16
+    },
+    "catalog": {
+      "qwen3:4b-q4_K_M": {
+        "name": "Qwen 3 · 4B",
+        "size": "2.6 GB",
+        "description": "Fast · recommended for 16 GB"
+      },
+      "qwen3:8b-q4_K_M": {
+        "name": "Qwen 3 · 8B",
+        "size": "5.2 GB",
+        "description": "More capable · uses more memory"
+      }
+    }
+  },
+  "memoryPressure": "The system has 17179869184 (1048576 pages with a page size of 16384).\nSystem-wide memory free percentage: 32%",
+  "passed": false
+}
