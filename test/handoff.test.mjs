@@ -53,9 +53,9 @@ test('handoff HTTP flow validates, applies, follows up, and reverts',async t=>{
   await new Promise(resolve=>app.server.listen(0,'127.0.0.1',resolve));const base='http://127.0.0.1:'+app.server.address().port;
   t.after(async()=>{await app.close();await rm(data,{recursive:true,force:true});await rm(workspace,{recursive:true,force:true});});
   const call=(path,value)=>fetch(base+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(value)});
-  const chat=app.store.create();let res=await call('/api/handoff/prepare',{workspace,task:'Create a hello file',chatId:chat.id,record:true});assert.equal(res.status,200);const prepared=await res.json();assert.match(prepared.prompt,/Create a hello file/);assert.equal(app.store.get(chat.id).messages.at(-1).meta.provider,'gemini');
-  res=await call('/api/handoff/validate',{workspace,chatId:chat.id,prompt:prepared.prompt,rawResponse:'not json'});assert.equal(res.status,400);const repair=await res.json();assert.match(repair.repairPrompt,/orbit-response-v1/);await assert.rejects(readFile(join(workspace,'hello.txt'),'utf8'));
-  res=await call('/api/handoff/validate',{workspace,chatId:chat.id,prompt:prepared.prompt,rawResponse:response([{type:'write',path:'hello.txt',content:'hello'}])});assert.equal(res.status,201);const validated=await res.json();
+  const chat=app.store.create();let res=await call('/api/handoff/prepare',{workspace,task:'Create a hello file',chatId:chat.id,record:true,provider:'gemini'});assert.equal(res.status,200);const prepared=await res.json();assert.match(prepared.prompt,/Create a hello file/);assert.equal(prepared.provider,'gemini');assert.equal(app.store.get(chat.id).messages.at(-1).meta.provider,'gemini');
+  res=await call('/api/handoff/validate',{workspace,chatId:chat.id,prompt:prepared.prompt,rawResponse:'not json',provider:'gemini'});assert.equal(res.status,400);const repair=await res.json();assert.match(repair.repairPrompt,/orbit-response-v1/);await assert.rejects(readFile(join(workspace,'hello.txt'),'utf8'));
+  res=await call('/api/handoff/validate',{workspace,chatId:chat.id,prompt:prepared.prompt,rawResponse:response([{type:'write',path:'hello.txt',content:'hello'}]),provider:'gemini'});assert.equal(res.status,201);const validated=await res.json();
   res=await call('/api/handoff/apply',{taskId:validated.taskId});assert.equal(res.status,200);const stream=await res.text();assert.match(stream,/"type":"done"/);assert.equal(await readFile(join(workspace,'hello.txt'),'utf8'),'hello');assert.equal(app.store.get(chat.id).messages.at(-1).meta.provider,'gemini');
   res=await call('/api/handoff/follow-up',{taskId:validated.taskId});assert.match((await res.json()).prompt,/LOCAL EXECUTION RESULTS/);
   res=await call(`/api/tasks/${validated.taskId}/revert`,{});assert.equal(res.status,200);await assert.rejects(readFile(join(workspace,'hello.txt'),'utf8'));
@@ -68,6 +68,17 @@ test('Gemini project flow carries image metadata and imports generated assets',a
   const call=(path,value)=>fetch(base+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(value)});
   const chat=app.store.create(),pixel='data:image/png;base64,iVBORw0KGgo=';
   let res=await call(`/api/chats/${chat.id}/documents`,{name:'reference.png',content:pixel});assert.equal(res.status,201);
-  res=await call('/api/handoff/prepare',{workspace,task:'Use the reference image',chatId:chat.id});assert.equal(res.status,200);const prepared=await res.json();assert.equal(prepared.attachments[0].kind,'image');assert.match(prepared.prompt,/reference\.png/);
+  res=await call('/api/handoff/prepare',{workspace,task:'Use the reference image',chatId:chat.id,provider:'gemini'});assert.equal(res.status,200);const prepared=await res.json();assert.equal(prepared.attachments[0].kind,'image');assert.match(prepared.prompt,/reference\.png/);
   res=await call('/api/workspace/assets',{workspace,name:'hero.png',path:'assets/hero.png',dataUrl:pixel});assert.equal(res.status,201);assert.equal((await res.json()).path,'assets/hero.png');assert.ok((await readFile(join(workspace,'assets/hero.png'))).length>0);
+});
+
+test('ChatGPT Free uses the same handoff contract and provider-aware follow-up',async t=>{
+  const data=await mkdtemp(join(tmpdir(),'orbit-chatgpt-data-')),workspace=await mkdtemp(join(tmpdir(),'orbit-chatgpt-work-')),app=createApp({dataDir:data});
+  await new Promise(resolve=>app.server.listen(0,'127.0.0.1',resolve));const base='http://127.0.0.1:'+app.server.address().port;
+  t.after(async()=>{await app.close();await rm(data,{recursive:true,force:true});await rm(workspace,{recursive:true,force:true});});
+  const call=(path,value)=>fetch(base+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(value)}),chat=app.store.create();
+  let res=await call('/api/handoff/prepare',{workspace,task:'Create a ChatGPT file',chatId:chat.id,record:true,provider:'chatgpt'});assert.equal(res.status,200);const prepared=await res.json();assert.equal(prepared.provider,'chatgpt');assert.equal(app.store.get(chat.id).messages.at(-1).meta.provider,'chatgpt');
+  res=await call('/api/handoff/validate',{workspace,chatId:chat.id,prompt:prepared.prompt,rawResponse:response([{type:'write',path:'chatgpt.txt',content:'same executor'}]),provider:'chatgpt'});assert.equal(res.status,201);const validated=await res.json();assert.equal(validated.provider,'chatgpt');
+  res=await call('/api/handoff/apply',{taskId:validated.taskId});assert.equal(res.status,200);assert.match(await res.text(),/"type":"done"/);assert.equal(await readFile(join(workspace,'chatgpt.txt'),'utf8'),'same executor');assert.equal(app.store.get(chat.id).messages.at(-1).meta.provider,'chatgpt');
+  res=await call('/api/handoff/follow-up',{taskId:validated.taskId});assert.match((await res.json()).prompt,/ChatGPT conversation/);
 });
